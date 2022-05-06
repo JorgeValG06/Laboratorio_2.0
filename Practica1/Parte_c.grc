@@ -1,6 +1,6 @@
 options:
   parameters:
-    author: Valeria Y Jorge
+    author: Jorge y Valeria
     catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: SampleRateDemo
+    id: multiplicador
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -22,36 +22,78 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Frecuencia Nyquist
+    title: "multiplicador de se\xF1ales"
     window_size: (1000,1000)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 44.0]
+    coordinate: [8, 8]
     rotation: 0
     state: enabled
 
 blocks:
-- name: freq
+- name: freq_a
   id: variable_qtgui_range
   parameters:
     comment: ''
     gui_hint: ''
-    label: Frecuencia
+    label: frecuencia
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: 1e3
     step: 1e3
     stop: 40e3
-    value: 2e3
+    value: 12e3
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 28.0]
+    coordinate: [392, 12.0]
+    rotation: 0
+    state: true
+- name: freq_b
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: frecuencia
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: 1e3
+    step: 1e3
+    stop: 40e3
+    value: 36e3
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 12.0]
+    rotation: 0
+    state: true
+- name: freq_c
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: frecuencia
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: 1e3
+    step: 1e3
+    stop: 40e3
+    value: 24e3
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 12.0]
     rotation: 0
     state: true
 - name: samp_rate
@@ -59,20 +101,20 @@ blocks:
   parameters:
     comment: ''
     gui_hint: ''
-    label: Frecuencia de muestreo
+    label: frecuencia de muestreo
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
-    start: '1000'
-    step: '1000'
-    stop: '80000'
-    value: '10000'
+    start: 1e3
+    step: 1e3
+    stop: 1e6
+    value: 10e3
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 28.0]
+    coordinate: [216, 12.0]
     rotation: 0
     state: true
 - name: analog_sig_source_x_0
@@ -82,19 +124,81 @@ blocks:
     alias: ''
     amp: '1'
     comment: ''
-    freq: freq
+    freq: freq_c
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
     type: float
-    waveform: analog.GR_SIN_WAVE
+    waveform: analog.GR_COS_WAVE
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [104, 284.0]
+    coordinate: [136, 484.0]
+    rotation: 0
+    state: true
+- name: analog_sig_source_x_1
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: freq_b
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: float
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 332.0]
+    rotation: 0
+    state: true
+- name: analog_sig_source_x_2
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: freq_a
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: float
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 188.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '3'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 344.0]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -113,7 +217,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 324.0]
+    coordinate: [600, 372.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -194,7 +298,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 212.0]
+    coordinate: [848, 260.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -254,7 +358,7 @@ blocks:
     nconnections: '1'
     size: '1024'
     srate: samp_rate
-    stemplot: 'True'
+    stemplot: 'False'
     style1: '1'
     style10: '1'
     style2: '1'
@@ -291,12 +395,15 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 372.0]
+    coordinate: [856, 468.0]
     rotation: 0
     state: true
 
 connections:
-- [analog_sig_source_x_0, '0', blocks_throttle_0, '0']
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '2']
+- [analog_sig_source_x_1, '0', blocks_multiply_xx_0, '1']
+- [analog_sig_source_x_2, '0', blocks_multiply_xx_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_throttle_0, '0']
 - [blocks_throttle_0, '0', qtgui_freq_sink_x_0, '0']
 - [blocks_throttle_0, '0', qtgui_time_sink_x_0, '0']
 
